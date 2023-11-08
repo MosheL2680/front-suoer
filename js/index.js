@@ -25,7 +25,7 @@ const displayProducts = async () => {
     displayy.innerHTML = `<div class="row row-cols-1 row-cols-md-6 g-1">` + products.map((prod, ind) => `
                 <div class="col">
                   <div class="card text-bg-dark mb-3">
-                    <img src="${MY_SERVER}/static${prod.img}" class="card-img card-img-top" alt="...">
+                    <img src=""https://super-django-1.onrender.com/static${prod.img}" class="card-img card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${prod.desc}</h5>
                       <p class="card-text">price: ${prod.price}$</p>
