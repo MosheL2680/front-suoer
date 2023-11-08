@@ -19,7 +19,7 @@ const loadProducts = async () => {
   displayProducts()
 }
 
-// Display products
+// Display products 
 const displayProducts = async () => {
   displayy.innerHTML =
     displayy.innerHTML = `<div class="row row-cols-1 row-cols-md-6 g-1">` + products.map((prod, ind) => `
