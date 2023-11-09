@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="js/gener.js"></script>
+    <script src="js/utils.js"></script>
     <script src="js/index.js"></script>
 </head>
 <body onload="loadCart(); loadProducts();">
@@ -34,7 +34,7 @@
                     <button class="nav-link" onclick="displayOrderHistory()">orders history</button>
               </li>
               <li class="nav-item">
-                <a href="cart.html" class="nav-link" id="yourCart">your cart</a>
+                <button onclick="cartLink()" class="nav-link" id="yourCart">your cart</button>
               </li>
               
               <!-- <li class="nav-item dropdown">

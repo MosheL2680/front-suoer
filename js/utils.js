@@ -1,5 +1,15 @@
-// This file contain functions I'm using in the rest of the files
+// Centralized configuration and utility functions shared across project files
 
+let products = []
+let cart = []
+const cartData = JSON.parse(localStorage.getItem("cart"));
+let total = 0;
+const MY_SERVER = "https://super-django-1.onrender.com"
+const token = sessionStorage.getItem("token") || null
+const tokenData = {
+  "Content-Type": "application/json",
+  "Authorization": "Bearer " + token,
+}
 
 // Display a success notification using Toastify
 function showSuccessNotification(message) {
@@ -37,17 +47,6 @@ function showErrorNotification(message) {
   }).showToast();
 }
 
-// Token Decoding
-function parseJwt(token) {
-  var base64Url = token.split('.')[1];
-  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
-    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
-
-  return JSON.parse(jsonPayload);
-}
-
 // Show error tostify and take to other page
 const changePageError = (page, message) => {
   showErrorNotification(message)
@@ -62,6 +61,22 @@ const changePageSuccess = (page, message) => {
   setTimeout(() => {
     window.location.href = page;
   }, 2000)
+}
+
+// Token Decoding
+function parseJwt(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
+
+// Return username if ther's a user loged in
+const current_user= ()=>{
+  if(token)  return parseJwt(token).username || nul
+  else return 'guest'
 }
 
 // Display username in top of page

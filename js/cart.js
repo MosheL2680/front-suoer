@@ -1,16 +1,3 @@
-let cart = []
-const cartData = JSON.parse(localStorage.getItem("cart"));
-let total = 0;
-const MY_SERVER = "https://super-django-1.onrender.com/"
-const token = sessionStorage.getItem("token") || null
-const tokenData = {
-  "Content-Type": "application/json",
-  "Authorization": "Bearer " + token,
-}
-// const current_user=parseJwt(token).username || null
-
-
-
 // Load cart list from local storage (and call for display)
 const loadCart = () => {
   if (cartData != null) {
@@ -25,12 +12,12 @@ const displayCart = () => {
     changePageError('index.html', 'your cart is empty')
   }
   total = 0;
-  cartDisplay.innerHTML = `<div class="row row-cols-1 row-cols-md-6 g-4">` + cart.map((item, ind) => {
+  cartDisplay.innerHTML = `    <h5>your cart, ${current_user()}:</h5><div class="row row-cols-1 row-cols-md-6 g-4">` + cart.map((item, ind) => {
     total += parseInt(item.price) * parseInt(item.amount);//calc total price
     return `
       <div class="col">
         <div class="card text-bg-secondary mb-1"  >
-          <img src="../static${item.img}" class="card-img card-img-top" alt="...">
+          <img src="${MY_SERVER}${item.img}" class="card-img card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">${item.desc} ${item.price}$</h5>
             <p class="card-text">amount: ${item.amount}</p>
@@ -59,11 +46,11 @@ const checkOut = async () => {
   const userConfirmed = confirm("Are you sure you want to check out?");//ask user to confirm checkout
   if (userConfirmed) {
     try {
-      let response = await axios.post(MY_SERVER + "checkout", { cart: cartData }, { headers: tokenData });//send cart and token to server
+      let response = await axios.post(MY_SERVER + "/checkout", { cart: cartData }, { headers: tokenData });//send cart and token to server
       if (response.data === "order saved fucking successfuly") {
         localStorage.removeItem("cart");//delete cart from localstorage
         cart = []//clear cart var
-        changePageSuccess('index.html', `chckout successfuly. you need to pay ${total}$`)
+        changePageSuccess('index.html',   `chckout successfuly. you need to pay ${total}$. GoodBye ${current_user()}:)`)
       }
     } catch (error) {
       if (error.response.status === 401) {
