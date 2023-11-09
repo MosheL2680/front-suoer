@@ -4,8 +4,7 @@ const displayOrderHistory = () => {
       .then((response) => {
         const orderHistory = response.data.orders;
         if (orderHistory.length === 0) {
-          showErrorNotification("No history of orders. Lets create new history:)")
-          return
+          changePageError('index.html', "No history of orders. Lets create new history:)")
         }
         orderHistory.reverse()//to get last one first
         // Build the HTML content for displaying order history
