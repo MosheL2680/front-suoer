@@ -83,3 +83,18 @@ const current_user= ()=>{
 const display_username = () => {
   return null
 }
+
+// make sure cart isnt empty before passing to cart page
+const cartLink = () => {
+  if (cart.length === 0 || !cart) {
+    showErrorNotification(`your cart is empty, ${current_user()}`)
+  }
+  else window.location.href = 'cart.html'
+}
+
+const OrderHistoryLink = () => {
+  if (!token || token === null) {
+    changePageError('login.html', 'Unauthorized. please login')
+  }
+  else window.location.href = 'history.html'
+}
