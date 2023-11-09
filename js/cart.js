@@ -4,11 +4,11 @@ const displayCart = () => {
     changePageError('index.html', 'your cart is empty')
   }
   total = 0;
-  cartDisplay.innerHTML = `    <h5>your cart, ${current_user()}:</h5><div class="row row-cols-1 row-cols-md-6 g-4">` + cart.map((item, ind) => {
+  cartDisplay.innerHTML = `    <h5>your cart, ${current_user()}:</h5><div class="row row-cols-1 row-cols-md-6 g-1">` + cart.map((item, ind) => {
     total += parseInt(item.price) * parseInt(item.amount);//calc total price
     return `
       <div class="col">
-        <div class="card text-bg-secondary mb-1"  >
+        <div class="card text-bg-dark mb-3">
           <img src="${MY_SERVER}${item.img}" class="card-img card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">${item.desc} ${item.price}$</h5>
