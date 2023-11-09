@@ -1,15 +1,36 @@
-// Load products from server
-const loadProducts = async () => {
-  const res = await axios.get(MY_SERVER + "/products")
-  products = res.data
-  displayProducts(products)
+// Load categories from the server and display them.
+const loadCategories = async () => {
+  const res = await axios.get(MY_SERVER + "/categories")
+  categories = res.data
+  displayCategories()
 }
+
+// Display categories on the user interface as buttons, each triggering the loading of products for the corresponding category.
+const displayCategories = () => {
+  categories.map((cat, ind) => displaycategories.innerHTML += `
+  <button onclick="loadProducts(${cat.id})" class="p-2">${cat.desc}</button>
+`)
+}
+
+
+// Load products from the server, either all products or those belonging to a specific category.
+const loadProducts = async (catID) => {
+  if (catID) {
+    const res = await axios.get(MY_SERVER + `/products/${catID}`);// Fetch products for the specified category from the server
+    const products = res.data;
+    displayProducts(products);
+  } else {
+    const res = await axios.get(MY_SERVER + `/products/`);// Fetch all products from the server
+    const products = res.data;
+    displayProducts(products);
+  }
+};
 
 
 // Display products list
 const displayProducts = async (prods) => {
-  displayy.innerHTML =
-    displayy.innerHTML = `<div class="row row-cols-1 row-cols-md-6 g-1">` + prods.map((prod, ind) => `
+  displayproducts.innerHTML =
+    displayproducts.innerHTML = `<div class="row row-cols-1 row-cols-md-6 g-1">` + prods.map((prod, ind) => `
                 <div class="col">
                   <div class="card text-bg-dark mb-3">
                     <img src="${MY_SERVER}${prod.img}" class="card-img card-img-top" alt="...">

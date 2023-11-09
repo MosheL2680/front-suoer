@@ -1,5 +1,6 @@
 // Centralized configuration and utility functions shared across project files
 
+let categories = []
 let products = []
 let cart = []
 const cartData = JSON.parse(localStorage.getItem("cart"));
