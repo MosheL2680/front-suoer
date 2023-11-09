@@ -2,6 +2,7 @@
 
 let categories = []
 let products = []
+let temp_products = []
 let cart = []
 const cartData = JSON.parse(localStorage.getItem("cart"));
 let total = 0;

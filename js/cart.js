@@ -47,13 +47,8 @@ const checkOut = async () => {
         changePageSuccess('index.html',   `chckout successfuly. you need to pay ${total}$. GoodBye ${current_user()}:)`)
       }
     } catch (error) {
-      if (error.response.status === 401) {
-        changePageError('login.html', 'Unauthorized. Please log in')
-      }
-      else {
-
-        console.log("Failed to perform the checkout.");
-      }
+      if (error.response.status === 401) changePageError('login.html', 'Unauthorized. Please log in')
+      else console.log("Failed to perform the checkout.");
     }
   }
 }
