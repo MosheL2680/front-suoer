@@ -5,6 +5,7 @@ const loadProducts = async () => {
   displayProducts(products)
 }
 
+
 // Display products list
 const displayProducts = async (prods) => {
   displayy.innerHTML =
@@ -22,20 +23,6 @@ const displayProducts = async (prods) => {
                 </div>`)
 }
 
-// Load cart list from local storage
-const loadCart = () => {
-  if (cartData != null) cart = cartData
-  displayCartLink()
-}
-
-// Dispaly cart link with amount of items
-const displayCartLink = () => {
-  const yourCartElement = document.getElementById("yourCart");
-  if (yourCartElement) {
-    if (cart.length === 0 || !cart) yourCartElement.innerHTML = "your cart(0)";
-    else yourCartElement.innerHTML = `your cart(${cart.length})`;
-  }
-};
 
 // Add item to cart and save cart in localstorage
 const buy = async (ind) => {

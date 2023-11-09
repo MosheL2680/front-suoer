@@ -11,6 +11,21 @@ const tokenData = {
   "Authorization": "Bearer " + token,
 }
 
+// Load cart list from local storage
+const loadCart = () => {
+  if (cartData != null) cart = cartData
+  displayCartLink()
+}
+
+// Dispaly cart link with amount of items
+const displayCartLink = () => {
+  const yourCartElement = document.getElementById("yourCart");
+  if (yourCartElement) {
+    if (cart.length === 0 || !cart) yourCartElement.innerHTML = "your cart(0)";
+    else yourCartElement.innerHTML = `your cart(${cart.length})`;
+  }
+};
+
 // Display a success notification using Toastify
 function showSuccessNotification(message) {
   Toastify({

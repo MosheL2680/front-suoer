@@ -1,11 +1,3 @@
-// Load cart list from local storage (and call for display)
-const loadCart = () => {
-  if (cartData != null) {
-    cart = cartData
-  }
-  displayCart()
-}
-
 // Display cart
 const displayCart = () => {
   if (cart.length === 0 || !cart) {
@@ -29,6 +21,7 @@ const displayCart = () => {
   totalPrice.innerHTML = `<br><h5>Total price: ${total}$</h5>`;//display total outside loop
 }
 
+
 // Remove item from cart list
 const remove = (id) => {
   cart = cart.filter(item => item.id !== id);//gives a new cart without this item
@@ -36,6 +29,7 @@ const remove = (id) => {
   showErrorNotification("Itam removed from cart")
   displayCart()
 }
+
 
 // checkout - Send cart to server
 const checkOut = async () => {
