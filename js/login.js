@@ -15,8 +15,9 @@ const login = async () => {
 
   res = await axios.post(MY_SERVER+"/login/", loginData)//send username & pass to server
     .then((res) => {
-      const token = res.data.access;
-      sessionStorage.setItem('token', token);//save access token to sessionstorage
+      const temp_token = res.data.access;
+      sessionStorage.setItem('token', temp_token);//save access token to sessionstorage
+      token = temp_token
       changePageSuccess('index.html',`You are logged in now ${current_user()}`)
     })
     .catch((error) => {

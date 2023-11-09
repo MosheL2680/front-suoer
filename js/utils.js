@@ -5,7 +5,7 @@ let cart = []
 const cartData = JSON.parse(localStorage.getItem("cart"));
 let total = 0;
 const MY_SERVER = "https://super-django-1.onrender.com"
-const token = sessionStorage.getItem("token") || null
+let token = sessionStorage.getItem("token") || null
 const tokenData = {
   "Content-Type": "application/json",
   "Authorization": "Bearer " + token,
