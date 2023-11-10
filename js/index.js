@@ -8,9 +8,9 @@
 
   // Display categories on the user interface as buttons, each triggering the loading of products for the corresponding category.
   const displayCategories = () => {
-    categories.map((cat, ind) => displaycategories.innerHTML += `
-    <button onclick="loadProducts(${cat.id})" class="p-2">${cat.desc}</button>
-  `)
+    categories.map((cat, ind) => dropdownoption.innerHTML += `
+    <li><a class="dropdown-item" onclick="loadProducts(${ind+1})" href="#">${cat.desc}</a></li>
+    `)
   }
 
 
