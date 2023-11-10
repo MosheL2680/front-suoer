@@ -1,5 +1,6 @@
   // Load categories from the server and display them.
   const loadCategories = async () => {
+    displayproducts.innerHTML = displaySpiner()
     const res = await axios.get(MY_SERVER + "/categories")
     categories = res.data
     displayCategories()
@@ -15,6 +16,7 @@
 
   // Load products from the server, either all products or those belonging to a specific category.
   const loadProducts = async (catID) => {
+    displayproducts.innerHTML = displaySpiner()
     if (catID) {
       const res = await axios.get(MY_SERVER + `/products/${catID}`);// Fetch products for the specified category from the server
       products = res.data;

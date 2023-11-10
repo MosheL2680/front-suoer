@@ -33,8 +33,10 @@ const remove = (id) => {
 
 // checkout - Send cart to server
 const checkOut = async () => {
+  chackoutbutton.innerHTML = displaySpiner()
   if (cart.length === 0) {
     showErrorNotification("Your cart is empty. Add items before checking out.");
+    chackoutbutton.innerHTML = 'CheckOut'
     return;//exit function if cart is empty
   }
   const userConfirmed = confirm("Are you sure you want to check out?");//ask user to confirm checkout
@@ -42,6 +44,7 @@ const checkOut = async () => {
     try {
       let response = await axios.post(MY_SERVER + "/checkout", { cart: cartData }, { headers: tokenData });//send cart and token to server
       if (response.data === "order saved fucking successfuly") {
+        chackoutbutton.innerHTML = 'CheckOut'
         localStorage.removeItem("cart");//delete cart from localstorage
         cart = []//clear cart var
         changePageSuccess('index.html',   `chckout successfuly. you need to pay ${total}$. GoodBye ${current_user()}:)`)
@@ -49,6 +52,7 @@ const checkOut = async () => {
     } catch (error) {
       if (error.response.status === 401) changePageError('login.html', 'Unauthorized. Please log in')
       else console.log("Failed to perform the checkout.");
+      chackoutbutton.innerHTML = 'CheckOut'
     }
   }
 }

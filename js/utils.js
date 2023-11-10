@@ -115,3 +115,10 @@ const OrderHistoryLink = () => {
   }
   else window.location.href = 'history.html'
 }
+
+//return a spiner to display when waiting for server
+const displaySpiner = () => {
+  return `<div class="spinner-grow" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`
+}

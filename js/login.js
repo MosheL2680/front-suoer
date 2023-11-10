@@ -1,10 +1,12 @@
 //Login - get token from server
 const login = async () => {
+  loginbutton.innerHTML = displaySpiner()
   const username = uName.value.trim();
   const password = pass.value.trim();
 
   if (!username || !password) {
     showErrorNotification("Please enter both a username and a password.");
+    loginbutton.innerHTML = 'Login'
     return;//exit function if input fields are empty
   }
 
@@ -18,9 +20,11 @@ const login = async () => {
       const temp_token = res.data.access;
       sessionStorage.setItem('token', temp_token);//save access token to sessionstorage
       token = temp_token
+      loginbutton.innerHTML = 'Login'
       changePageSuccess('index.html',`You are logged in now ${current_user()}`)
     })
     .catch((error) => {
+      loginbutton.innerHTML = 'Login'
       console.log(error);
       showErrorNotification("Username or password isn't correct");//tostify if server dosn't recognize user
     });
@@ -29,12 +33,14 @@ const login = async () => {
 
 //Register - create new user
 const register = async () => {
+  registerbutton.innerHTML = displaySpiner()
   const username = uName.value.trim();
   const password = pass.value.trim();
   const email = mail.value.trim()||null
 
   if (!username || !password) {
     showErrorNotification("Please enter both a username and a password.");
+    registerbutton.innerHTML = 'Sign Up'
     return;//exit function if input fields are empty
   }
 
@@ -46,12 +52,15 @@ const register = async () => {
 
   try {
     await axios.post(MY_SERVER+"/register", registerData);//send username & pass to server
+    registerbutton.innerHTML = 'Sign Up'
     showSuccessNotification("User created successfully");
   } catch (error) {
     if (error.response && error.response.status === 500) {
       showErrorNotification("Username is already in use. Please choose another.");//tostify user when server dosn't accept the username
+      registerbutton.innerHTML = 'Sign Up'
     } else {
       console.error("Registration failed:", error);
+      registerbutton.innerHTML = 'Sign Up'
     }
   }
 };

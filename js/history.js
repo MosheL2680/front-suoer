@@ -1,5 +1,6 @@
 // Display order history in the div
 const displayOrderHistory = () => {
+  displayy.innerHTML = displaySpiner()
     axios.get(MY_SERVER + '/history', { headers: tokenData })
       .then((response) => {
         const orderHistory = response.data.orders;
