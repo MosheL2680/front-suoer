@@ -4,7 +4,7 @@ const displayCart = () => {
     changePageError('index.html', 'your cart is empty')
   }
   total = 0;
-  cartDisplay.innerHTML = `    <h5>your cart, ${current_user()}:</h5><div class="row row-cols-1 row-cols-md-6 g-1">` + cart.map((item, ind) => {
+  cartDisplay.innerHTML = cart.map((item, ind) => {
     total += parseInt(item.price) * parseInt(item.amount);//calc total price
     return `
       <div class="col">

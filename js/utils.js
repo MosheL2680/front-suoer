@@ -17,6 +17,7 @@ const tokenData = {
 const loadCart = () => {
   if (cartData != null) cart = cartData
   displayCartLink()
+  displayLoginLink()
 }
 
 // Dispaly cart link with amount of items
@@ -26,7 +27,13 @@ const displayCartLink = () => {
     if (cart.length === 0 || !cart) yourCartElement.innerHTML = "your cart(0)";
     else yourCartElement.innerHTML = `your cart(${cart.length})`;
   }
-};
+}
+
+// Display username as the text in the login link
+const displayLoginLink = () => {
+  const loginElement = document.getElementById("loginButton");
+  if(token) loginElement.innerHTML = parseJwt(token).username || nul
+}
 
 // Display a success notification using Toastify
 function showSuccessNotification(message) {
@@ -121,4 +128,16 @@ const displaySpiner = () => {
   return `<div class="spinner-grow" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>`
+}
+
+// toggle dark mode
+function darkMode() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+  var darkModeButton = document.getElementById("darkModeButton");
+  if (element.classList.contains("dark-mode")) {
+    darkModeButton.innerHTML = "Light Mode";
+  } else {
+    darkModeButton.innerHTML = "Dark Mode";
+  }
 }

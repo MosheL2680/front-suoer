@@ -21,9 +21,9 @@
 
 <body onload="loadCart(); loadCategories(); loadProducts()">
 
-  <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg sticky-top bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#" style="color: aqua;">MosheShop</a>
+      <a class="navbar-brand" href="#" style="color: aqua;  font-size: 30px;">MosheShop</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -34,21 +34,24 @@
             <a class="nav-link active" aria-current="page" href="index.html">Shop</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login.html">Login</a>
+            <button onclick="cartLink()" class="nav-link" id="yourCart">your cart</button>
           </li>
           <li class="nav-item">
             <button class="nav-link" onclick="OrderHistoryLink()">orders history</button>
           </li>
           <li class="nav-item">
-            <button onclick="cartLink()" class="nav-link" id="yourCart">your cart</button>
+            <a class="nav-link" id="loginButton" href="login.html">Login</a>
           </li>
         </ul>
+        <div class="d-flex">
+          <button class="nav-link" id="darkModeButton" style="color: aliceblue;" onclick="darkMode()">Dark mode</button>
+        </div>
       </div>
     </div>
     </div>
   </nav>
 
-  <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg sticky-top bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -59,8 +62,12 @@
             </a>
             <ul class="dropdown-menu" id="dropdownoption">
               <li><a class="dropdown-item" onclick="loadProducts()" href="#">All products</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
             </ul>
+          </li>
+          <li class="nav-item">
           </li>
         </ul>
       </div>
@@ -70,7 +77,7 @@
 
   <div class="d-flex flex-row mb-3" id="displaycategories">
   </div>
-  <div id="displayproducts"></div>
+  <div id="displayproducts" class="row row-cols-1 row-cols-md-6 g-1"></div>
   </div>
 </body>
 

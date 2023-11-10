@@ -21,6 +21,7 @@ const login = async () => {
       sessionStorage.setItem('token', temp_token);//save access token to sessionstorage
       token = temp_token
       loginbutton.innerHTML = 'Login'
+      displayLoginLink()
       changePageSuccess('index.html',`You are logged in now ${current_user()}`)
     })
     .catch((error) => {
