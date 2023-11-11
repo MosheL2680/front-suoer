@@ -1,8 +1,6 @@
 // Display cart
 const displayCart = () => {
-  if (cart.length === 0 || !cart) {
-    changePageError('index.html', 'your cart is empty')
-  }
+  if (cart.length === 0 || !cart) changePageError('index.html', `your cart is empty, ${current_user()}`)
   total = 0;
   cartDisplay.innerHTML = cart.map((item, ind) => {
     total += parseInt(item.price) * parseInt(item.amount);//calc total price
@@ -26,19 +24,18 @@ const displayCart = () => {
 const remove = (id) => {
   cart = cart.filter(item => item.id !== id);//gives a new cart without this item
   localStorage.setItem("cart", JSON.stringify(cart));//save updated cart to localstorage
-  showErrorNotification("Itam removed from cart")
+  showSuccessNotification("Itam removed from cart")
   displayCart()
 }
 
 
 // checkout - Send cart to server
 const checkOut = async () => {
-  chackoutbutton.innerHTML = displaySpiner()
-  if (cart.length === 0) {
-    showErrorNotification("Your cart is empty. Add items before checking out.");
-    chackoutbutton.innerHTML = 'CheckOut'
-    return;//exit function if cart is empty
+  if (!token || token === null) {
+    changePageError('login.html', 'Unauthorized. please login')
+    return//exit function if unauthorized
   }
+  chackoutbutton.innerHTML = displaySpiner()
   const userConfirmed = confirm("Are you sure you want to check out?");//ask user to confirm checkout
   if (userConfirmed) {
     try {
@@ -50,8 +47,7 @@ const checkOut = async () => {
         changePageSuccess('index.html',   `chckout successfuly. you need to pay ${total}$. GoodBye ${current_user()}:)`)
       }
     } catch (error) {
-      if (error.response.status === 401) changePageError('login.html', 'Unauthorized. Please log in')
-      else console.log("Failed to perform the checkout.");
+      console.log("Failed to perform the checkout.");
       chackoutbutton.innerHTML = 'CheckOut'
     }
   }

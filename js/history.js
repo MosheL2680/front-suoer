@@ -31,8 +31,6 @@ const displayOrderHistory = () => {
             `).join('')}
           </ul>
         `;
-
-      // Set the content of the order history div
       orderHistoryDiv.innerHTML = orderHistoryHtml;
     })
     .catch((error) => {

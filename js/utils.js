@@ -13,6 +13,7 @@ const tokenData = {
   "Authorization": "Bearer " + token,
 }
 
+
 // Load cart list from local storage
 const loadCart = () => {
   if (cartData != null) cart = cartData
@@ -23,10 +24,7 @@ const loadCart = () => {
 // Dispaly cart link with amount of items
 const displayCartLink = () => {
   const yourCartElement = document.getElementById("yourCart");
-  if (yourCartElement) {
-    if (cart.length === 0 || !cart) yourCartElement.innerHTML = "your cart(0)";
-    else yourCartElement.innerHTML = `your cart(${cart.length})`;
-  }
+  if (yourCartElement) yourCartElement.innerHTML = (cart.length === 0 || !cart)? "your cart(0)" : `your cart(${cart.length})`;
 }
 
 // Display username as the text in the login link
@@ -97,33 +95,22 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload);
 }
 
-// Return username if ther's a user loged in
+// Return username if exist, else return 'guest'
 const current_user= ()=>{
-  if(token)  return parseJwt(token).username || nul
-  else return 'guest'
-}
-
-// Display username in top of page
-const display_username = () => {
-  return null
+  return (token) ?  parseJwt(token).username || nul : 'guest'
 }
 
 // make sure cart isnt empty before passing to cart page
 const cartLink = () => {
-  if (cart.length === 0 || !cart) {
-    showErrorNotification(`your cart is empty, ${current_user()}`)
-  }
-  else window.location.href = 'cart.html'
+  (cart.length === 0 || !cart) ? showErrorNotification(`your cart is empty, ${current_user()}`) : window.location.href = 'cart.html'
 }
 
+//Make sure user login before passing to order hustory page
 const OrderHistoryLink = () => {
-  if (!token || token === null) {
-    changePageError('login.html', 'Unauthorized. please login')
-  }
-  else window.location.href = 'history.html'
+  (!token || token === null) ? changePageError('login.html', 'Unauthorized. please login') : window.location.href = 'history.html'
 }
 
-//return a spiner to display when waiting for server
+//Return a spiner to display when waiting for server
 const displaySpiner = () => {
   return `<div class="spinner-grow" role="status">
   <span class="visually-hidden">Loading...</span>
@@ -135,9 +122,5 @@ function darkMode() {
   var element = document.body;
   element.classList.toggle("dark-mode");
   var darkModeButton = document.getElementById("darkModeButton");
-  if (element.classList.contains("dark-mode")) {
-    darkModeButton.innerHTML = "Light Mode";
-  } else {
-    darkModeButton.innerHTML = "Dark Mode";
-  }
+  darkModeButton.innerHTML = (element.classList.contains("dark-mode"))? "Light Mode" : "Dark Mode";
 }
