@@ -18,7 +18,7 @@
   <title>Login</title>
 </head>
 
-<body onload="loadCart()">
+<body onload="loadCart(); checkStatus()">
 
   <nav class="navbar navbar-expand-lg sticky-top bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
@@ -52,7 +52,7 @@
 
 
 
-
+<div id="display" style="margin-left: 10px;">
   <div class="form-floating mb-3">
     <input type="text" class="form-control" id="uName" placeholder="username">
     <label for="floatingInput">username</label>
@@ -66,12 +66,11 @@
     <label for="email">Email</label>
   </div>
 
-
-
-
-  <button id="loginbutton" onclick="login()" class="btn btn-primary mb-3">login</button>
+  <button id="loginbutton" onclick="login()" class="btn btn-primary mb-3">Login</button>
   <button id="registerbutton" onclick="register()" class="btn btn-primary mb-3">Sign Up</button>
-  <a href="index.html">Back to the shop</a>
+ 
+</div>
+ <a href="index.html">Back to the shop</a>
 </body>
 
 </html>
