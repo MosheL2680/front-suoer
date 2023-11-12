@@ -16,7 +16,7 @@ const displayCart = () => {
         </div>
       </div>`;
   });
-  totalPrice.innerHTML = `<br><h5>Total price: ${total}$</h5>`;//display total outside loop
+  displayicon.innerHTML += `<br>${total}$<button onclick="checkOut()" class="btn btn-success" style="margin-top:10px;margin-left:10px">CheckOut: ${total}$</button>`
 }
 
 
