@@ -14,7 +14,7 @@ const displayOrderHistory = () => {
           <ul>
             ${orderHistory.map(order => `
               <li>
-                <strong>Order Date:</strong> ${order.order_date}<br>
+                <strong>Order Date:</strong>${new Date(order.order_date).toLocaleString()}<br>
                 <ul>
                 <div class="row row-cols-1 row-cols-md-6 g-1">
                   ${order.order_details.map(detail => ` 
