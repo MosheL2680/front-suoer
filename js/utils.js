@@ -15,10 +15,12 @@ const tokenData = {
 
 
 // Load cart list from local storage
+// (Since I call this function with every page load, I'm using it to call other functions)
 const loadCart = () => {
   if (cartData != null) cart = cartData
   displayCartLink()
   displayLoginLink()
+  checkDarkMode()
 }
 
 // Dispaly cart link with amount of items
@@ -118,10 +120,23 @@ const displaySpiner = () => {
 `
 }
 
-// toggle dark mode
-function darkMode() {
+//Toggle dark mode
+const darkMode = () => {
   var element = document.body;
   element.classList.toggle("dark-mode");
-  var darkModeButton = document.getElementById("darkModeButton");
-  darkModeButton.innerHTML = (element.classList.contains("dark-mode"))? "Light Mode" : "Dark Mode";
+  var darkModeButton = document.getElementById("darkModeButton");// Update button text based on the mode
+  darkModeButton.innerHTML = element.classList.contains("dark-mode") ? "Light Mode" : "Dark Mode";
+  // Store the mode preference in local storage
+  (element.classList.contains("dark-mode")) ? localStorage.setItem("mode", "dark") : localStorage.setItem("mode", "light");
 }
+
+//Check for user preference in local storage
+const checkDarkMode = () => {
+  var element = document.body;
+  var mode = localStorage.getItem("mode");
+  if (mode === "dark") {
+    element.classList.add("dark-mode");
+    var darkModeButton = document.getElementById("darkModeButton");
+    darkModeButton.innerHTML = "Light Mode";
+  }
+};
