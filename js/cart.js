@@ -45,7 +45,7 @@ const checkOut = async () => {
         checkoutbutton.innerHTML = 'CheckOut'
         localStorage.removeItem("cart");//delete cart from localstorage
         cart = []//clear cart var
-        changePageSuccess('index.html',   `chckout successfuly. you need to pay ${total}$. GoodBye ${current_user()}:)`)
+        changePageSuccess('index.html',   `Thanks for your order ${current_user()}:) Recipt sent to your email`)
       }
     } catch (error) {
       console.log("Failed to perform the checkout.");
