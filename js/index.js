@@ -35,7 +35,7 @@ const displayProducts = async (prods) => {
     displayproducts.innerHTML = prods.map((prod, ind) => `<div class="card">
       <img src="${MY_SERVER}${prod.img}" alt="Denim Jeans" class="img" style="width:100%">
       <h1>${prod.desc}</h1>
-      <p class="price">$1${prod.price}</p>
+      <p class="price">$${prod.price}</p>
       <input style="justify-content: center; align-items: center;" type="number" id="amount_${ind}" value="1">
       <p><button onclick="buy(${ind})">Add to Cart</button></p>
     </div>`)

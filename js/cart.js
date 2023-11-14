@@ -3,7 +3,8 @@ const displayCart = () => {
   if (cart.length === 0 || !cart) changePageError('index.html', `your cart is empty, ${current_user()}`)
   total = 0;
   cartDisplay.innerHTML = cart.map((item, ind) => {
-    total += parseInt(item.price) * parseInt(item.amount);//calc total price
+    total += parseFloat(item.price) * parseFloat(item.amount);//calc total price
+    total = parseFloat(total.toFixed(2)); // Limit total to 2 decimal places
     return `
       <div class="col">
         <div class="card text-bg-dark mb-3">
@@ -16,7 +17,7 @@ const displayCart = () => {
         </div>
       </div>`;
   });
-  displayicon.innerHTML += `<br>${total}$<button onclick="checkOut()" class="btn btn-success" style="margin-top:10px;margin-left:10px">CheckOut: ${total}$</button>`
+  checkoutbutton.innerHTML = `Checkout ${total}$`
 }
 
 
@@ -35,20 +36,20 @@ const checkOut = async () => {
     changePageError('login.html', 'Unauthorized. please login')
     return//exit function if unauthorized
   }
-  chackoutbutton.innerHTML = displaySpiner()
+  checkoutbutton.innerHTML = displaySpiner()
   const userConfirmed = confirm("Are you sure you want to check out?");//ask user to confirm checkout
   if (userConfirmed) {
     try {
       let response = await axios.post(MY_SERVER + "/checkout", { cart: cartData }, { headers: tokenData });//send cart and token to server
       if (response.data === "order saved fucking successfuly") {
-        chackoutbutton.innerHTML = 'CheckOut'
+        checkoutbutton.innerHTML = 'CheckOut'
         localStorage.removeItem("cart");//delete cart from localstorage
         cart = []//clear cart var
         changePageSuccess('index.html',   `chckout successfuly. you need to pay ${total}$. GoodBye ${current_user()}:)`)
       }
     } catch (error) {
       console.log("Failed to perform the checkout.");
-      chackoutbutton.innerHTML = 'CheckOut'
+      checkoutbutton.innerHTML = 'CheckOut'
     }
   }
 }

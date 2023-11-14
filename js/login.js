@@ -1,7 +1,6 @@
 //Chaeck if allredy logged in and display logout button
 const checkStatus = () => {
-  if(token) display.innerHTML = `<br><h4>logged in as ${current_user()}</h4><br><button id="registerbutton" onclick="logout()" class="btn btn-primary mb-3">Log Out</button>`
-
+  if(token) display.innerHTML = `<br><h4>logged in as ${current_user()}</h4><br><button id="logoutbutton" onclick="logout()" class="btn btn-primary mb-3">Log Out</button>`
 }
 
 //Login - get token from server
@@ -73,13 +72,14 @@ const register = async () => {
 };
 
 const logout = async () => {
+  logoutbutton.innerHTML = displaySpiner()
   try {
     await axios.get(MY_SERVER + "/logout/");
     changePageSuccess('login.html', `You've been logged out`);
+    logoutbutton.innerHTML = 'Logout'
     sessionStorage.removeItem('token'); // Clear the token from session storage
   } catch (error) {
     console.error("Logout failed:", error);
     showErrorNotification("Logout failed. Please try again.");
-    // Handle any error notification or additional actions for failed logout
   }
 }
