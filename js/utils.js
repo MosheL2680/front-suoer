@@ -102,6 +102,11 @@ const current_user= ()=>{
   return (token) ?  parseJwt(token).username || nul : 'guest'
 }
 
+// Return username mail if exist, else return '-'
+const current_user_mail= ()=>{
+  return (token) ? parseJwt(token).email||'-' : '-'
+}
+
 // make sure cart isnt empty before passing to cart page
 const cartLink = () => {
   (cart.length === 0 || !cart) ? showErrorNotification(`your cart is empty, ${current_user()}`) : window.location.href = 'cart.html'
